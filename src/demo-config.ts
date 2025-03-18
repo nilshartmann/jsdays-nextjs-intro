@@ -10,16 +10,16 @@ export const delayConfig: Record<string, number> = {
   GetArticleList: 0,
 
   // Single Article on `/articles/[articleId]`
-  GetArticle: 1200,
+  GetArticle: 0,
 
   // Submitting the Newsletter form
   SubscribeNewsletter: 150,
 
   // Reading comments on `/articles/[articleId]`
-  GetCommentList: 0,
+  GetCommentList: 1200,
 
   // Reading related articles on `/articles/[articleId]`,
-  GetRelatedArticles: 2400,
+  GetRelatedArticles: 0,
 
   // Delay the response in LikesWidget
   AddLike: 500,
