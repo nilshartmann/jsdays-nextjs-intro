@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <title>ecolify Demo</title>
         {/*
@@ -32,6 +32,7 @@ export default function RootLayout({
         <link href="/fontawesome/css/solid.css" rel="stylesheet" />
       </head>
       <body
+        suppressHydrationWarning
         className={`flex min-h-svh flex-col overflow-y-scroll font-inter text-teal-900 antialiased`}
       >
         <GlobalHeader>
