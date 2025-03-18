@@ -10,7 +10,7 @@ export const delayConfig: Record<string, number> = {
   GetArticleList: 0,
 
   // Single Article on `/articles/[articleId]`
-  GetArticle: 0,
+  GetArticle: 1200,
 
   // Submitting the Newsletter form
   SubscribeNewsletter: 150,

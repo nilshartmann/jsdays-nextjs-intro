@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { formatDate } from "@/components/format-date";
 import { formatDuration } from "@/components/format-duration";
 import { H1 } from "@/components/Heading";
@@ -37,7 +39,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
               "font-opensans font-bold text-teal-700 hover:text-teal-800 hover:decoration-4"
             }
           >
-            {article.title}
+            <Link href={`/articles/${article.id}`}>{article.title}</Link>
           </H1>
           <div className={"text font-inter"}>
             <span className={"leading-3"}>{formatDate(article.date)} </span>
