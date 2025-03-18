@@ -7,11 +7,18 @@ import { fetchArticleList } from "@/queries/queries";
 //  NICHT ausgeführt: im Browser
 //  -> Default in Next.js
 
-export default async function ArticleListPage() {
+type ArticleListPage = {
+  searchParams: Promise<any>;
+};
+
+export default async function ArticleListPage({
+  searchParams,
+}: ArticleListPage) {
+  console.log("Rendering ArticleListPage", new Date().toLocaleTimeString());
+  const sp = await searchParams;
+  console.log("Search Params", sp);
   // ... process.env.VERY_SECRET_API_KEY
   //     SQL
-
-  console.log("ArticleListPage rendering!");
 
   const articleList = await fetchArticleList();
 

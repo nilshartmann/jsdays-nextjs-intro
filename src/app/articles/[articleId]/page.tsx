@@ -8,8 +8,17 @@ type ArticlePageProps = {
   params: Promise<{ articleId: string }>;
 };
 
+export async function generateStaticParams() {
+  console.log("generateStaticParams!");
+  return [{ articleId: "A_1" }, { articleId: "A_2" }, { articleId: "A_3" }];
+}
+
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { articleId } = await params;
+  console.log(
+    "Rendering ArticlePage " + articleId,
+    new Date().toLocaleTimeString(),
+  );
 
   const article = await fetchArticle(articleId);
 

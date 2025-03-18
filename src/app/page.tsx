@@ -3,6 +3,7 @@ import Link from "next/link";
 import { H1 } from "@/components/Heading";
 
 export default function LandingPage() {
+  console.log("Rendering LandingPage", new Date().toLocaleTimeString());
   return (
     <section>
       <H1>Hallo Next.js!</H1>

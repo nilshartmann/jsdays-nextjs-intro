@@ -39,7 +39,9 @@ export default function ArticleCard({ article }: ArticleCardProps) {
               "font-opensans font-bold text-teal-700 hover:text-teal-800 hover:decoration-4"
             }
           >
-            <Link href={`/articles/${article.id}`}>{article.title}</Link>
+            <Link prefetch={false} href={`/articles/${article.id}`}>
+              {article.title}
+            </Link>
           </H1>
           <div className={"text font-inter"}>
             <span className={"leading-3"}>{formatDate(article.date)} </span>
