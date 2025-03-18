@@ -33,7 +33,7 @@ export default function RootLayout({
         className={`flex min-h-svh flex-col overflow-y-scroll font-inter text-teal-900 antialiased`}
       >
         <div className={"flex items-center justify-center text-4xl"}>
-          <p>Hello Next.js Workshop 👋</p>
+          {children}
         </div>
       </body>
     </html>
