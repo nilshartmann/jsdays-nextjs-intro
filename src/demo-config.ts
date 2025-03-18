@@ -10,7 +10,7 @@ export const delayConfig: Record<string, number> = {
   GetArticleList: 0,
 
   // Single Article on `/articles/[articleId]`
-  GetArticle: 1200,
+  GetArticle: 0,
 
   // Submitting the Newsletter form
   SubscribeNewsletter: 150,
@@ -19,10 +19,10 @@ export const delayConfig: Record<string, number> = {
   GetCommentList: 0,
 
   // Reading related articles on `/articles/[articleId]`,
-  GetRelatedArticles: 2400,
+  GetRelatedArticles: 0,
 
   // Delay the response in LikesWidget
-  AddLike: 500,
+  AddLike: 4000,
 };
 
 // Setting this to 'force-cache' will enable Next.js
