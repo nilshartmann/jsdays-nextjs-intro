@@ -9,7 +9,7 @@ import TwoColumnLayout from "@/components/layout/TwoColumnLayout";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { Sidebar } from "@/components/Sidebar";
 import { SidebarBox } from "@/components/SidebarBox";
-import { fetchArticle } from "@/queries/queries";
+import { fetchArticle, fetchRelatedArticles } from "@/queries/queries";
 
 type ArticlePageProps = {
   params: Promise<{ articleId: string }>;
@@ -27,6 +27,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     new Date().toLocaleTimeString(),
   );
 
+  // process.env.SECRET_API_KEY
+
+  const relatedArticlesPromise = fetchRelatedArticles(articleId);
   const article = await fetchArticle(articleId);
 
   if (!article) {
@@ -41,13 +44,17 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <TwoColumnLayout
         sidebar={
           <Sidebar>
+            <SidebarBox title={"Related Articles"}>
+              <Suspense fallback={<LoadingIndicator />}>
+                <RelatedArticleSlider
+                  relatedArticlesPromise={relatedArticlesPromise}
+                />
+              </Suspense>
+            </SidebarBox>
             <SidebarBox title={"Comments"}>
               <Suspense fallback={<LoadingIndicator />}>
                 <CommentList articleId={articleId} />
               </Suspense>
-            </SidebarBox>
-            <SidebarBox title={"Related Articles"}>
-              <RelatedArticleSlider />
             </SidebarBox>
           </Sidebar>
         }

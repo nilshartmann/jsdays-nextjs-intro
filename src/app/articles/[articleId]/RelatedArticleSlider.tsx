@@ -1,18 +1,28 @@
 "use client";
-import { useState } from "react";
+import { use, useState } from "react";
 
 import RelatedArticleBox from "@/components/articlepage/RelatedArticleBox";
-import { dummyRelatedArticles } from "@/demo-config";
+import { RelatedArticle } from "@/types";
 
 // Client Komponente
 //    wird gerendert:
 //     - im Client (Browser)
 //     - auf dem Server (SSR)
 
-export default function RelatedArticleSlider() {
+type RelatedArticleSliderProps = {
+  headline?: string;
+  relatedArticlesPromise: Promise<RelatedArticle[]>;
+};
+
+export default function RelatedArticleSlider({
+  headline,
+  relatedArticlesPromise,
+}: RelatedArticleSliderProps) {
   console.log("RelatedArticlesSlider rendering");
 
-  const articles = dummyRelatedArticles;
+  // useEffect( () => fetch("..."), [] )
+
+  const articles = use(relatedArticlesPromise);
 
   const [currentArticle, setCurrentArticle] = useState(0);
 
@@ -27,10 +37,13 @@ export default function RelatedArticleSlider() {
   };
 
   return (
-    <RelatedArticleBox
-      article={articles[currentArticle]}
-      onNextClick={() => handleClick(+1)}
-      onPrevClick={() => handleClick(-1)}
-    />
+    <>
+      {headline}
+      <RelatedArticleBox
+        article={articles[currentArticle]}
+        onNextClick={() => handleClick(+1)}
+        onPrevClick={() => handleClick(-1)}
+      />
+    </>
   );
 }
