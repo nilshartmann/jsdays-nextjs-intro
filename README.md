@@ -49,7 +49,7 @@
 
 - Bitte klone das Repository von Github:
   - ```bash
-    git clone https://github.com/nextjsreactgraphql/nextjs-intro.git
+    git clone https://github.com/nilshartmann/jsdays-nextjs-intro.git
     ```
 
 ## Installation der Packages
@@ -58,6 +58,7 @@
   - ```bash
     pnpm install
     ```
+  - (npm funktioniert wahrscheinlich auch)
 
 ## Starten des Frontends
 
@@ -73,6 +74,11 @@
 ## Backend starten (per Docker)
 
 Das Backend (mit der GraphQL API) ist nicht Teil dieses Workspaces. Du kannst es mit Docker starten.
+
+> Falls Docker bei dir lokal nicht funktioniert, kannst du auch das Backend in der Cloud verwenden.
+> Der Zugriff ist dann natürlich etwas langsamer, deswegen würde ich Docker empfehlen, wenn das bei dir funktioniert.
+>
+> Um statt des lokalen Backends per Docker das Backend aus der Cloud zu verwenden, musst du in der Datei `src/graphql-client.config` die `url` im `HttpClient` von `http://localhost:20080/graphql` auf `https://ecolify-backend.fly.dev/graphql` umändern (Zeile 16)
 
 - Achtung! Das Backend horcht auf **Port `20080`**. Dieser Port muss bei dir frei sein!
 - Zum Starten des Backends folgende Docker Kommandos in einem Terminal ausführen.
