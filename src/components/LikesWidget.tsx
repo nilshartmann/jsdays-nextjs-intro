@@ -1,13 +1,26 @@
+import { revalidatePath } from "next/cache";
+
 import LikeIcon from "@/components/LikeIcon";
+import { mutateArticleLikes } from "@/queries/queries";
 
 type LikesWidgetProps = {
   articleId: string;
   currentLikes: number;
 };
 
-export function LikesWidget({ currentLikes }: LikesWidgetProps) {
+export function LikesWidget({ articleId, currentLikes }: LikesWidgetProps) {
+  // SERVER FUNCTION
+  async function handleSubmit(formData: FormData) {
+    "use server";
+    console.log("HANDLE SUBMIT", articleId);
+
+    await mutateArticleLikes(articleId);
+    revalidatePath("/articles");
+    revalidatePath(`/articles/${articleId}`);
+  }
+
   return (
-    <div className={"inline-block"}>
+    <form action={handleSubmit} className={"inline-block"}>
       <button
         type={"submit"}
         className={
@@ -19,6 +32,6 @@ export function LikesWidget({ currentLikes }: LikesWidgetProps) {
           {currentLikes}
         </span>
       </button>
-    </div>
+    </form>
   );
 }
