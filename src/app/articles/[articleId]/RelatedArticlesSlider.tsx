@@ -4,24 +4,15 @@ import { use, useState } from "react";
 import RelatedArticleBox from "@/components/articlepage/RelatedArticleBox";
 import { RelatedArticle } from "@/types";
 
-// Client Komponente
-//    wird gerendert:
-//     - im Client (Browser)
-//     - auf dem Server (SSR)
-
-type RelatedArticleSliderProps = {
-  headline?: string;
+type RelatedArticlesSliderProps = {
   relatedArticlesPromise: Promise<RelatedArticle[]>;
 };
 
-export default function RelatedArticleSlider({
-  headline,
+export default function RelatedArticlesSlider({
   relatedArticlesPromise,
-}: RelatedArticleSliderProps) {
-  console.log("RelatedArticlesSlider rendering");
-
-  // useEffect( () => fetch("..."), [] )
-
+}: RelatedArticlesSliderProps) {
+  // await geht hier nicht, weil wir in einer client Komponenten sind
+  // stattdessen "use" von React verwenden
   const articles = use(relatedArticlesPromise);
 
   const [currentArticle, setCurrentArticle] = useState(0);
@@ -37,13 +28,10 @@ export default function RelatedArticleSlider({
   };
 
   return (
-    <>
-      {headline}
-      <RelatedArticleBox
-        article={articles[currentArticle]}
-        onNextClick={() => handleClick(+1)}
-        onPrevClick={() => handleClick(-1)}
-      />
-    </>
+    <RelatedArticleBox
+      article={articles[currentArticle]}
+      onNextClick={() => handleClick(+1)}
+      onPrevClick={() => handleClick(-1)}
+    />
   );
 }

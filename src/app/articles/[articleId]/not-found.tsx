@@ -1,5 +1,3 @@
-import { H1 } from "@/components/Heading";
-
 export default function ArticleNotFound() {
-  return <H1>This article could not be found.</H1>;
+  return <h1>Article not found - sorry!</h1>;
 }

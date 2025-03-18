@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-import RelatedArticleSlider from "@/app/articles/[articleId]/RelatedArticleSlider";
+import RelatedArticlesSlider from "@/app/articles/[articleId]/RelatedArticlesSlider";
 import { ArticleBanner } from "@/components/articlepage/ArticleBanner";
 import ArticleBody from "@/components/articlepage/ArticleBody";
 import CommentList from "@/components/articlepage/CommentList";
@@ -11,23 +11,12 @@ import { Sidebar } from "@/components/Sidebar";
 import { SidebarBox } from "@/components/SidebarBox";
 import { fetchArticle, fetchRelatedArticles } from "@/queries/queries";
 
-type ArticlePageProps = {
+type Props = {
   params: Promise<{ articleId: string }>;
 };
 
-// export async function generateStaticParams() {
-//   console.log("generateStaticParams!");
-//   return [{ articleId: "A_1" }, { articleId: "A_2" }, { articleId: "A_3" }];
-// }
-
-export default async function ArticlePage({ params }: ArticlePageProps) {
+export default async function ArticlePage({ params }: Props) {
   const { articleId } = await params;
-  console.log(
-    "Rendering ArticlePage " + articleId,
-    new Date().toLocaleTimeString(),
-  );
-
-  // process.env.SECRET_API_KEY
 
   const relatedArticlesPromise = fetchRelatedArticles(articleId);
   const article = await fetchArticle(articleId);
@@ -36,8 +25,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     return notFound();
   }
 
-  // React.Suspense
-
   return (
     <main>
       <ArticleBanner article={article} />
@@ -45,15 +32,21 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         sidebar={
           <Sidebar>
             <SidebarBox title={"Related Articles"}>
-              <Suspense fallback={<LoadingIndicator />}>
-                <RelatedArticleSlider
+              <Suspense
+                fallback={<LoadingIndicator>Loading...</LoadingIndicator>}
+              >
+                <RelatedArticlesSlider
                   relatedArticlesPromise={relatedArticlesPromise}
                 />
               </Suspense>
             </SidebarBox>
             <SidebarBox title={"Comments"}>
-              <Suspense fallback={<LoadingIndicator />}>
-                <CommentList articleId={articleId} />
+              <Suspense
+                fallback={
+                  <LoadingIndicator>Loading Comments...</LoadingIndicator>
+                }
+              >
+                <CommentList articleId={article.id} />
               </Suspense>
             </SidebarBox>
           </Sidebar>

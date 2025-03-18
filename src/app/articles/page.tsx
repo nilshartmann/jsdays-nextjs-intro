@@ -1,29 +1,21 @@
 import ArticleCard from "@/components/ArticleCard";
 import ArticleListGrid from "@/components/articlelistpage/ArticleListGrid";
+import ArticleListNavBar from "@/components/articlelistpage/ArticleListNavBar";
 import { fetchArticleList } from "@/queries/queries";
 
-// React Server Components (RSC)
-//  ausgeführt: auf dem Server + im Build-Prozess
-//  NICHT ausgeführt: im Browser
-//  -> Default in Next.js
-
-type ArticleListPage = {
-  searchParams: Promise<any>;
+type ArticleListPageProps = {
+  searchParams: Promise<Record<string, string>>;
 };
 
 export default async function ArticleListPage({
   searchParams,
-}: ArticleListPage) {
-  console.log("Rendering ArticleListPage", new Date().toLocaleTimeString());
-  const sp = await searchParams;
-  console.log("Search Params", sp);
-  // ... process.env.VERY_SECRET_API_KEY
-  //     SQL
-
-  const articleList = await fetchArticleList();
+}: ArticleListPageProps) {
+  const { orderBy } = await searchParams;
+  const articleList = await fetchArticleList({ orderBy });
 
   return (
     <div className={"container mx-auto"}>
+      <ArticleListNavBar />
       <ArticleListGrid>
         {articleList.articles.map((a) => (
           <ArticleCard key={a.id} article={a} />
