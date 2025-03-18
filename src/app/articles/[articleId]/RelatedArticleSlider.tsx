@@ -1,9 +1,17 @@
+"use client";
 import { useState } from "react";
 
 import RelatedArticleBox from "@/components/articlepage/RelatedArticleBox";
 import { dummyRelatedArticles } from "@/demo-config";
 
-export default function RelatedArticlesSlider() {
+// Client Komponente
+//    wird gerendert:
+//     - im Client (Browser)
+//     - auf dem Server (SSR)
+
+export default function RelatedArticleSlider() {
+  console.log("RelatedArticlesSlider rendering");
+
   const articles = dummyRelatedArticles;
 
   const [currentArticle, setCurrentArticle] = useState(0);
