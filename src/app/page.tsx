@@ -1,9 +1,11 @@
 import Link from "next/link";
 
+import { H1 } from "@/components/Heading";
+
 export default function LandingPage() {
   return (
     <section>
-      <h1>Hallo Next.js!</h1>
+      <H1>Hallo Next.js!</H1>
       <Link className={"cursor-pointer underline"} href={"/articles"}>
         Zeig mir alle Artikel an!
       </Link>
